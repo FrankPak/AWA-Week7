@@ -68,31 +68,24 @@ userRouter.post('/login',
     body("email").trim().isLength({min: 3}).escape(),
     body("password").isLength({min: 1}),
     async (req: Request, res: Response) => {
-        const errors: Result<ValidationError> = validationResult(req)
-        if(!errors.isEmpty()) {
-            console.log(errors);
-            return res.status(400).json({errors: errors.array()})
-            
-        }
     try {
-        //const existingUser: IUser | null = await User.findOne({email: req.body.email})
         const existingUser = userList.find(user => user.email === req.body.email)
-        console.log(existingUser)
 
-        if (existingUser) {
-            return res.status(403).json({message: "Email already in use"})
+        if (!existingUser) {
+            return res.status(403).json({message: "Login failed"})
         }
 
-        const salt: string = bcrypt.genSaltSync(10)
-        const hash: string = bcrypt.hashSync(req.body.password, salt)
+        if (bcrypt.compareSync(req.body.password, existingUser.password)) {
+            
+            const jwtPayload: JwtPayload = {
+                email: existingUser.email
+            }
 
-        const user: IUser = {
-            email: req.body.email,
-            password: hash
+            const token: string = jwt.sign(jwtPayload, process.env.SECRET as string, { expiresIn: "2m"})
+
+            return res.status(200).json({success: true, token})
         }
-        userList.push(user)
-
-        return res.status(200).json(user)
+        return res.status(401).json({message: "Login failed"})
 
     
     } catch (error: any){
