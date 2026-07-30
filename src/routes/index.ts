@@ -1,8 +1,8 @@
 import { Request, Response, Router } from "express";
 import path  from "path"
-import {Offer, IOffer} from "./models/Offer.js"
-import upload from "./middleware/multer-config.js";
-import { Image, IImage } from "./models/Image.js";
+import {Offer, IOffer} from "../models/Offer.js"
+import upload from "../middleware/multer-config.js";
+import { Image, IImage } from "../models/Image.js";
 
 const router: Router = Router()
 

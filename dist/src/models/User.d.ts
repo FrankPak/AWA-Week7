@@ -1,12 +1,8 @@
 import mongoose, { Document } from "mongoose";
-interface ITodo {
-    todo: string;
-    checked: boolean;
-}
 interface IUser extends Document {
-    name: string;
-    todos: ITodo[];
+    email: string;
+    password: string;
 }
 declare const User: mongoose.Model<IUser>;
-export { User, IUser, ITodo };
+export { User, IUser };
 //# sourceMappingURL=User.d.ts.map
