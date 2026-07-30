@@ -4,7 +4,6 @@ import bcrypt from 'bcryptjs'
 import { body, Result, ValidationError, validationResult } from 'express-validator'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 //import { User, IUser } from '../models/User'
-//import { validateToken } from '../middleware/validateToken'
 
 const userRouter: Router = Router()
 

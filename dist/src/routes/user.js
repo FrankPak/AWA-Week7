@@ -8,7 +8,6 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const express_validator_1 = require("express-validator");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 //import { User, IUser } from '../models/User'
-//import { validateToken } from '../middleware/validateToken'
 const userRouter = (0, express_1.Router)();
 const userList = [];
 userRouter.post('/register', (0, express_validator_1.body)("email").trim().isLength({ min: 3 }).escape(), (0, express_validator_1.body)("password").isLength({ min: 1 }), async (req, res) => {

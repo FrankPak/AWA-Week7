@@ -25,10 +25,11 @@ const fetchData = async (event) => {
         } else {
             const data = await response.json()
             
-            if(data.token) {
+            //if(data.token) {
                 localStorage.setItem("token", data.token)
-                window.location.href = "index.html"
-            }
+                window.location.href = "/"
+            //}
+            
         }
 
     } catch (error) {
